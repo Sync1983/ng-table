@@ -1,0 +1,13 @@
+{
+    "name": "sync/ng-table",
+    "type": "library",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "Sync1983",
+            "email": "1983sync@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
