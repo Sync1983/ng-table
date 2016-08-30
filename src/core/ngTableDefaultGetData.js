@@ -62,7 +62,7 @@ function ngTableDefaultGetDataProvider(){
             }
         }
 
-        function getOrderByFn (/*params*/){
+        function getOrderByFn (/*params*/){            
             return $filter(provider.sortingFilterName);
         }
 
@@ -89,7 +89,8 @@ function ngTableDefaultGetDataProvider(){
 
         function applySort(data, params) {
             var orderBy = params.orderBy();
-            var orderByFn = getOrderByFn(params);
+            var orderByFn = getOrderByFn(params);  
+            console.log(orderBy,orderByFn);
             return orderBy.length ? orderByFn(data, orderBy) : data;
         }
 

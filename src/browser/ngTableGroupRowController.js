@@ -29,11 +29,12 @@ function ngTableGroupRowController($scope){
     }
 
     function changeSortDirection(){
+      console.log("CSD");
         var newDirection;
         if ($scope.params.hasGroup($scope.$selGroup, 'asc')) {
             newDirection = 'desc';
         } else if ($scope.params.hasGroup($scope.$selGroup, 'desc')){
-            newDirection = '';
+            newDirection = 'asc';
         } else {
             newDirection = 'asc';
         }
@@ -64,15 +65,16 @@ function ngTableGroupRowController($scope){
     }
 
     function groupBy(group){
+        console.log("CD");
         if (isSelectedGroup(group)){
             changeSortDirection();
-        } else {
+        } else {          
             if (group.groupable){
                 $scope.params.group(group.groupable($scope));
             } else{
                 $scope.params.group(group);
             }
-        }
+        }        
     }
 
     function isSelectedGroup(group){

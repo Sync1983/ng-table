@@ -52,7 +52,8 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
             },
             defaultGroupOptions = {
                 defaultSort: 'asc', // set to 'asc' or 'desc' to apply sorting to groups
-                isExpanded: true
+                isExpanded: true,
+                sortGroups: true
             },
             defaultSettingsFns = getDefaultSettingFns();
 
@@ -478,6 +479,10 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
                 }
             }
         };
+        
+        this.hasGroupHeader = function(){
+          return angular.isFunction(params.showGroupHeader)?params.showGroupHeader():params.showGroupHeader;          
+        }
 
         /**
          * @ngdoc method
@@ -674,7 +679,7 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
                         return getPath(item, groupField);
                     };
                 }
-
+                
                 var settings = params.settings();
                 var originalDataOptions = settings.dataOptions;
                 settings.dataOptions = { applyPaging: false };
@@ -694,7 +699,7 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
                     for (var i in groups) {
                         result.push(groups[i]);
                     }
-                    if (sortDirection) {
+                    if (group.sortGroups && sortDirection) {
                         var orderByFn = ngTableDefaultGetData.getOrderByFn();
                         var orderBy = convertSortToOrderBy({
                             value: sortDirection
