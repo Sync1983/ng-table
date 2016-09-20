@@ -81,9 +81,11 @@ function ngTableDefaultGetDataProvider(){
             return filterFn.call(params, data, parsedFilter, params.settings().filterOptions.filterComparator);
         }
 
-        function applyPaging(data, params) {
+        function applyPaging(data, params) {          
             var pagedData = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            params.total(data.length); // set total for recalc pagination
+            if( params.settings().dataOptions.applyPagging ){
+              params.total(data.length); // set total for recalc pagination              
+            }
             return pagedData;
         }
 

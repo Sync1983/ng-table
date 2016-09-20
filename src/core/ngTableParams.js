@@ -204,7 +204,7 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
          * @param {string} total Total quantity of items
          * @returns {Object|Number} Current page or `this`
          */
-        this.total = function(total) {
+        this.total = function(total) {          
             return angular.isDefined(total) ? this.settings({
                 'total': total
             }) : settings.total;
@@ -361,7 +361,7 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
          * @param {number} maxBlocks    Quantity of blocks for pagination
          * @returns {Array} Array of pages
          */
-        this.generatePagesArray = function(currentPage, totalItems, pageSize, maxBlocks) {
+        this.generatePagesArray = function(currentPage, totalItems, pageSize, maxBlocks) {          
             if (!arguments.length){
                 currentPage = this.page();
                 totalItems = this.total();
@@ -610,7 +610,7 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
         this.reloadPages = (function() {
             var currentPages;
             return function(){
-                var oldPages = currentPages;
+                var oldPages = currentPages;                
                 var newPages = self.generatePagesArray(self.page(), self.total(), self.count());
                 if (!angular.equals(oldPages, newPages)){
                     currentPages = newPages;
