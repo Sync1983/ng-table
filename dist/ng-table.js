@@ -1732,7 +1732,7 @@ function ngTableDefaultGetDataProvider(){
 
         function applyPaging(data, params) {          
             var pagedData = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            if( params.settings().dataOptions.applyPagging ){
+            if( params.settings().dataOptions.applyPagging || params.parameters().hidePager ){
               params.total(data.length); // set total for recalc pagination              
             }
             return pagedData;
@@ -2306,12 +2306,17 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
 
             var maxPage, maxPivotPages, minPage, numPages, pages, hidePager;
             maxBlocks = maxBlocks && maxBlocks < 6 ? 6 : maxBlocks;
-
-            pages = [];
-            numPages = Math.ceil(totalItems / pageSize);
             hidePager = this.parameters.hidePager || true;
             
-            if ((numPages > 1) && ( !hidePager )) {
+            pages = [];
+            if( hidePager ){
+              this.count(Math.max(totalItems, pageSize));
+              pageSize = totalItems;
+            }
+            numPages = Math.ceil(totalItems / pageSize);
+            
+            
+            if (numPages > 1) {
                 pages.push({
                     type: 'prev',
                     number: Math.max(1, currentPage - 1),

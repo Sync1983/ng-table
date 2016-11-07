@@ -83,7 +83,7 @@ function ngTableDefaultGetDataProvider(){
 
         function applyPaging(data, params) {          
             var pagedData = data.slice((params.page() - 1) * params.count(), params.page() * params.count());
-            if( params.settings().dataOptions.applyPagging ){
+            if( params.settings().dataOptions.applyPagging || params.parameters().hidePager ){
               params.total(data.length); // set total for recalc pagination              
             }
             return pagedData;
