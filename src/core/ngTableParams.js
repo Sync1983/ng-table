@@ -368,12 +368,14 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
                 pageSize = this.count();
             }
 
-            var maxPage, maxPivotPages, minPage, numPages, pages;
+            var maxPage, maxPivotPages, minPage, numPages, pages, hidePager;
             maxBlocks = maxBlocks && maxBlocks < 6 ? 6 : maxBlocks;
 
             pages = [];
             numPages = Math.ceil(totalItems / pageSize);
-            if (numPages > 1) {
+            hidePager = this.parameters.hidePager || true;
+            
+            if ((numPages > 1) && ( !hidePager )) {
                 pages.push({
                     type: 'prev',
                     number: Math.max(1, currentPage - 1),
@@ -740,7 +742,8 @@ function ngTableParamsFactory($q, $log, $filter, ngTableDefaults, ngTableDefault
             count: 10,
             filter: {},
             sorting: {},
-            group: {}
+            group: {},
+            hidePager: false
         };
         angular.extend(params, ngTableDefaults.params);
 
